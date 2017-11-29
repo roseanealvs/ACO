@@ -13,16 +13,17 @@ public class Interface extends javax.swing.JFrame {
 
     public List<Item> itens;
     private Long inicioExecucao;
+    private double totalItens = 0;
     public Interface() {
         initComponents();
     }
     
     public void imprimirGeracao (List<Formiga> formigas, int geracao){
         String itensGene;
-        txtAreaGera.append("Geração: "+geracao+"\r\n");
-        int j=0;
+        txtAreaGera.append("Iteração: "+(geracao+1)+"\r\n");
+        int j=1;
         for (Formiga f : formigas) {
-            txtAreaGera.append("Cromossomo: "+ j++ );
+            txtAreaGera.append("Formiga: "+ j++ );
             itensGene = " ";
             for (int i = 0; i< f.getIterarNoVetor(); i++) {
                 itensGene += itens.get(f.getItens()[i]).getNome() +" - ";
@@ -405,12 +406,15 @@ public class Interface extends javax.swing.JFrame {
         JFileChooser chooser = new JFileChooser(""); 
         chooser.setFileSelectionMode(JFileChooser.FILES_ONLY); 
         int returnVal = chooser.showOpenDialog((java.awt.Component) null); 
-        
+        totalItens = 0;
         if ( returnVal == chooser.APPROVE_OPTION ) { 
             java.io.File inFile = chooser.getSelectedFile(); 
             itens = new Util().getItens(inFile.getAbsolutePath());
         }
         lblItens.setText(String.valueOf(itens.size()));
+        for (Item iten : itens) {
+            totalItens += iten.getPreco();
+        }
     }//GEN-LAST:event_btnCarregarItensActionPerformed
 
     private void btnPlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlayActionPerformed
@@ -423,7 +427,7 @@ public class Interface extends javax.swing.JFrame {
         btnPlay.setEnabled(false);
         carregando.setText("CARREGANDO...");
         inicioExecucao = System.currentTimeMillis();
-        new ACO(txtIteracoes.getText(), txtVolume.getText(), txtPeso.getText(), txtFormiga.getText(), itens, this, txtAlpha.getText(), txtBeta.getText(), txtRho.getText()).executarACO();
+        new ACO(txtIteracoes.getText(), txtVolume.getText(), txtPeso.getText(), txtFormiga.getText(), itens, this, txtAlpha.getText(), txtBeta.getText(), txtRho.getText(), totalItens).executarACO();
     }//GEN-LAST:event_btnPlayActionPerformed
 
     /**

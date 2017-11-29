@@ -30,7 +30,7 @@ public class Util {
                     i.setPeso(Double.parseDouble(infoItem[j++]));
                     i.setVolume(Double.parseDouble(infoItem[j++]));
                     i.setPreco(Double.parseDouble(infoItem[j++]));
-
+                    
                     itens.add(i);
                 }
             }
