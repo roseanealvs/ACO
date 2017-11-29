@@ -3,75 +3,87 @@ package principal;
 
 /**
  *
- * @author Allan, Cleber, Gessica
+ * @author Jessica, Roseane, Bianca, Ayla, Luana, Kleber
  */
-public class Formiga implements Dados {
-    private int[] rota; // caminho adotado pela formiga
+public class Formiga implements Comparable{
+    private int[] itens; // caminho adotado pela formiga
     private int ultimaPosicao;
-    private double distanciaPercorrida;
+    private double preco = 0;
+    private double peso = 0;
+    private double volume = 0;
     private int iterarNoVetor;
     
-    public Formiga() {
-        rota = new int[NUM_CIDADES];
+    public Formiga(int numItens) {
+        itens = new int[numItens];
         ultimaPosicao = 0;
-        distanciaPercorrida = 0.0;
-        iterarNoVetor = 0;
+        preco = 0.0;
+        this.iterarNoVetor = 0;
     }
 
-    /**
-     * @return the rota
-     */
-    public int[] getRota() {
-        return rota;
+    public int[] getItens() {
+        return itens;
     }
 
-    /**
-     * @param rota the rota to set
-     */
-    public void setRota(int[] rota) {
-        this.rota = rota;
+    public void setItens(int[] itens) {
+        this.itens = itens;
     }
 
-    /**
-     * @return the ultimaPosicao
-     */
     public int getUltimaPosicao() {
         return ultimaPosicao;
     }
 
-    /**
-     * @param ultimaPosicao the ultimaPosicao to set
-     */
     public void setUltimaPosicao(int ultimaPosicao) {
         this.ultimaPosicao = ultimaPosicao;
     }
 
-    /**
-     * @return the distanciaPercorrida
-     */
-    public double getDistanciaPercorrida() {
-        return distanciaPercorrida;
+    public double getPreco() {
+        return preco;
     }
 
-    /**
-     * @param distanciaPercorrida the distanciaPercorrida to set
-     */
-    public void setDistanciaPercorrida(double distanciaPercorrida) {
-        this.distanciaPercorrida += distanciaPercorrida;
+    public void setPreco(double distanciaPercorrida) {
+        this.preco += distanciaPercorrida;
     }
 
-    /**
-     * @return the iterarNoVetor
-     */
     public int getIterarNoVetor() {
         return iterarNoVetor;
     }
 
-    /**
-     * @param iterarNoVetor the iterarNoVetor to set
-     */
     public void setIterarNoVetor(int iterarNoVetor) {
         this.iterarNoVetor = iterarNoVetor;
+    }
+
+    public double getPeso() {
+        return peso;
+    }
+
+    public void setPeso(double peso) {
+        this.peso = peso;
+    }
+
+    public double getVolume() {
+        return volume;
+    }
+
+    public void setVolume(double volume) {
+        this.volume = volume;
+    }
+
+    public void somarAoTotalMochila(double pesoItem, double precoItem, double volumeItem) {
+        peso += pesoItem;
+        volume += volumeItem;
+        preco += precoItem;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        Formiga f = (Formiga) o;
+        if(this.preco > f.preco){
+            return -1;
+        }
+        if(this.preco < f.preco){
+            return 1;
+        }
+        return 0;
     }
     
 }
